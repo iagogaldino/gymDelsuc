@@ -1,0 +1,7 @@
+{
+  "name": "gymDelsuc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
