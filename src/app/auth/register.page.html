@@ -1,0 +1,79 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="header">
+      <ion-buttons slot="start">
+        <ion-button fill="clear" (click)="onClickcreateAccount()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
+
+    <div class="brand">
+      <ion-icon name="barbell-outline"></ion-icon>
+      <h3>FitTrainer</h3>
+      <p>Conecte-se com personal trainers profissionais</p>
+    </div>
+
+    <div class="section-label">Tipo de conta</div>
+    <div class="type-toggle">
+      <button [class.active]="accountType==='student'" (click)="setType('student')">
+        <ion-icon name="person-outline"></ion-icon>
+        <span>Aluno</span>
+      </button>
+      <button [class.active]="accountType==='trainer'" (click)="setType('trainer')">
+        <ion-icon name="ribbon-outline"></ion-icon>
+        <span>Personal Trainer</span>
+      </button>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="form">
+      <ion-item lines="none">
+        <ion-input placeholder="Digite seu nome completo" [(ngModel)]="name" name="name"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input placeholder="seu@email.com" type="email" [(ngModel)]="email" name="email"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input #pwd type="password" placeholder="Mínimo 8 caracteres" [(ngModel)]="password"
+          name="password"></ion-input>
+        <ion-button fill="clear" size="small">
+          <ion-icon name="eye-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input #cpwd type="password" placeholder="Digite novamente sua senha" [(ngModel)]="confirmPassword"
+          name="confirmPassword"></ion-input>
+        <ion-button fill="clear" size="small">
+          <ion-icon name="eye-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <div class="mt-10">
+        <ion-checkbox [(ngModel)]="acceptedTerms" name="terms"></ion-checkbox>
+        <label>Li e aceito os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a></label>
+      </div>
+
+      <ion-button expand="block" class="primary" type="submit">Criar conta</ion-button>
+    </form>
+
+    <div class="divider">ou</div>
+
+    <div class="providers">
+      <ion-button expand="block" fill="outline">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Continuar com Google
+      </ion-button>
+      <ion-button expand="block" fill="outline">
+        <ion-icon slot="start" name="logo-facebook"></ion-icon>
+        Continuar com Facebook
+      </ion-button>
+    </div>
+
+    <div class="footer">
+      <span>Já tem uma conta? <a (click)="onClickcreateAccount()">Fazer login</a></span>
+    </div>
+  </div>
+</ion-content>

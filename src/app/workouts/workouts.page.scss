@@ -1,0 +1,66 @@
+.plan-card {
+    ion-item {
+        --padding-start: 0;
+    }
+
+    .week {
+        margin-top: 8px;
+    }
+
+    .week-label {
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .week-days {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+        position: relative;
+    }
+
+    .week-days span {
+        color: var(--ion-color-medium);
+        font-size: 12px;
+    }
+
+    .count {
+        margin-left: auto;
+        color: var(--ion-color-medium);
+        font-size: 12px;
+    }
+}
+
+.recent-header {
+    margin-top: 8px;
+}
+
+.recent-list .recent-name {
+    font-weight: 600;
+}
+
+.trainer-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.trainer-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+ion-card {
+    padding: 8px;
+}
+
+ion-card-header {
+    padding: 8px;
+}
+
+ion-card-content {
+    padding: 8px;
+}

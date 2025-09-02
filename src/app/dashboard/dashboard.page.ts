@@ -25,3 +25,4 @@ export class DashboardPage {
     this.router.navigate(['/home']);
   }
 }
+

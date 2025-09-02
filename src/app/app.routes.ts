@@ -19,7 +19,15 @@ export const routes: Routes = [
     loadComponent: () => import('./dashboard/dashboard.page').then((m) => m.DashboardPage),
   },
   {
+    path: 'workouts',
+    loadComponent: () => import('./workouts/workouts.page').then((m) => m.WorkoutsPage),
+  },
+  {
     path: 'auth',
     loadComponent: () => import('./auth/auth.page').then((m) => m.AuthPage),
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./auth/register.page').then((m) => m.RegisterPage),
   },
 ];
