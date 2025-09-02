@@ -1,0 +1,205 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>GymDelsuc</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="auth-container">
+    <!-- Logo and Welcome -->
+    <div class="welcome-section">
+      <div class="logo">
+        <ion-icon name="fitness" size="large"></ion-icon>
+        <h1>GymDelsuc</h1>
+      </div>
+      <p class="subtitle">Conectando alunos a personal trainers de qualidade</p>
+    </div>
+
+    <!-- Toggle Buttons -->
+    <ion-segment [(ngModel)]="isLogin" (ionChange)="toggleMode()" class="auth-toggle">
+      <ion-segment-button value="true">
+        <ion-label>Entrar</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="false">
+        <ion-label>Cadastrar</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      <ion-text color="danger">{{ errorMessage }}</ion-text>
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="isLogin" (ngSubmit)="onLogin()" class="auth-form">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input 
+          type="email" 
+          [(ngModel)]="loginForm.email" 
+          name="email"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input 
+          type="password" 
+          [(ngModel)]="loginForm.password" 
+          name="password"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="isLoading"
+        class="submit-btn">
+        <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+        <span *ngIf="!isLoading">Entrar</span>
+      </ion-button>
+    </form>
+
+    <!-- Registration Form -->
+    <form *ngIf="!isLogin" (ngSubmit)="onRegister()" class="auth-form">
+      <ion-item>
+        <ion-label position="floating">Nome completo</ion-label>
+        <ion-input 
+          type="text" 
+          [(ngModel)]="registerForm.name" 
+          name="name"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input 
+          type="email" 
+          [(ngModel)]="registerForm.email" 
+          name="email"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input 
+          type="password" 
+          [(ngModel)]="registerForm.password" 
+          name="password"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Confirmar senha</ion-label>
+        <ion-input 
+          type="password" 
+          [(ngModel)]="registerForm.confirmPassword" 
+          name="confirmPassword"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tipo de usuário</ion-label>
+        <ion-select [(ngModel)]="registerForm.userType" name="userType">
+          <ion-select-option value="student">Aluno</ion-select-option>
+          <ion-select-option value="trainer">Personal Trainer</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Student specific fields -->
+      <div *ngIf="registerForm.userType === 'student'">
+        <ion-item>
+          <ion-label>Objetivo</ion-label>
+          <ion-select [(ngModel)]="registerForm.objective" name="objective">
+            <ion-select-option 
+              *ngFor="let obj of objectives" 
+              [value]="obj.id">
+              {{ obj.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Peso (kg)</ion-label>
+          <ion-input 
+            type="number" 
+            [(ngModel)]="registerForm.physicalData.weight" 
+            name="weight">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Altura (cm)</ion-label>
+          <ion-input 
+            type="number" 
+            [(ngModel)]="registerForm.physicalData.height" 
+            name="height">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Idade</ion-label>
+          <ion-input 
+            type="number" 
+            [(ngModel)]="registerForm.physicalData.age" 
+            name="age">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Gênero</ion-label>
+          <ion-select [(ngModel)]="registerForm.physicalData.gender" name="gender">
+            <ion-select-option value="male">Masculino</ion-select-option>
+            <ion-select-option value="female">Feminino</ion-select-option>
+            <ion-select-option value="other">Outro</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="isLoading"
+        class="submit-btn">
+        <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+        <span *ngIf="!isLoading">Cadastrar</span>
+      </ion-button>
+    </form>
+
+    <!-- Social Login -->
+    <div class="social-login">
+      <p class="divider">ou</p>
+      
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        (click)="onGoogleLogin()"
+        [disabled]="isLoading"
+        class="google-btn">
+        <ion-icon name="logo-google" slot="start"></ion-icon>
+        Continuar com Google
+      </ion-button>
+
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        (click)="onFacebookLogin()"
+        [disabled]="isLoading"
+        class="facebook-btn">
+        <ion-icon name="logo-facebook" slot="start"></ion-icon>
+        Continuar com Facebook
+      </ion-button>
+    </div>
+
+    <!-- Terms -->
+    <div class="terms">
+      <p>Ao continuar, você concorda com nossos <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a></p>
+    </div>
+  </div>
+</ion-content>

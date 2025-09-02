@@ -1,27 +1,17 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 12px;         /* spacing between cards */
+  padding: 12px;     /* optional padding */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.cards-container ion-card {
+  flex: 0 0 auto;    /* prevent cards from shrinking */
+  max-width: 200px;  /* adjust size as you prefer */
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+.center-container {
+  display: flex;
+  align-items: center;     /* vertical */
 }

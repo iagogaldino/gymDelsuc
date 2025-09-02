@@ -1,0 +1,499 @@
+.search-section {
+  margin-bottom: 20px;
+  
+  ion-searchbar {
+    --background: #ffffff;
+    --color: #1f2937;
+    --placeholder-color: #6b7280;
+    --icon-color: #6b7280;
+    --clear-button-color: #6b7280;
+    --border-radius: 12px;
+    --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    
+    &::part(container) {
+      background: #ffffff;
+    }
+    
+    &::part(searchbar-input) {
+      color: #1f2937 !important;
+      font-weight: 500;
+      
+      &::placeholder {
+        color: #6b7280 !important;
+      }
+    }
+    
+    &::part(searchbar-icon) {
+      color: #6b7280;
+    }
+    
+    &::part(clear-button) {
+      color: #6b7280;
+    }
+  }
+}
+
+.featured-section {
+  margin-bottom: 32px;
+  padding: 0 16px;
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 24px;
+    
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ion-color-dark);
+      margin: 0 0 8px 0;
+    }
+    
+    p {
+      color: var(--ion-color-medium);
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+}
+
+.featured-trainers-container {
+  position: relative;
+  overflow: hidden;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  &::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+  
+  &::after {
+    right: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+}
+
+.featured-trainers-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 8px 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+.featured-trainer-card {
+  flex: 0 0 280px;
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--ion-color-primary);
+  }
+  
+  .featured-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, var(--ion-color-warning), #fbbf24);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    ion-icon {
+      font-size: 10px;
+    }
+  }
+  
+  .trainer-avatar {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px auto;
+    border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    ion-icon {
+      font-size: 28px;
+      color: white;
+    }
+  }
+  
+  .trainer-info {
+    text-align: center;
+    margin-bottom: 16px;
+    
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ion-color-dark);
+      margin: 0 0 8px 0;
+    }
+    
+    .specialties {
+      color: var(--ion-color-medium);
+      font-size: 13px;
+      margin: 0 0 12px 0;
+      line-height: 1.4;
+    }
+    
+    .rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      
+      ion-icon {
+        color: var(--ion-color-warning);
+        font-size: 14px;
+      }
+      
+      span {
+        font-weight: 600;
+        color: var(--ion-color-dark);
+        font-size: 14px;
+      }
+      
+      .reviews {
+        color: var(--ion-color-medium);
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+    
+    .location {
+      color: var(--ion-color-medium);
+      font-size: 12px;
+      margin: 0 0 4px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      
+      ion-icon {
+        font-size: 12px;
+      }
+    }
+    
+    .experience {
+      color: var(--ion-color-primary);
+      font-size: 11px;
+      font-weight: 600;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+  
+  .price-info {
+    text-align: center;
+    
+    .price {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ion-color-dark);
+      margin-bottom: 12px;
+    }
+    
+    ion-button {
+      --border-radius: 8px;
+      --border-color: var(--ion-color-primary);
+      --color: var(--ion-color-primary);
+      font-size: 12px;
+      height: 32px;
+      
+      &:hover {
+        --background: var(--ion-color-primary);
+        --color: white;
+      }
+    }
+  }
+}
+
+.filters-content {
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin: 0 16px 16px 16px;
+  
+  ion-item {
+    margin-bottom: 16px;
+    --background: #ffffff;
+    --border-color: #e5e7eb;
+    --color: var(--ion-color-dark);
+    border-radius: 8px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  ion-button {
+    margin-top: 16px;
+    --border-radius: 8px;
+  }
+}
+
+.results-info {
+  padding: 16px;
+  text-align: center;
+  background: #f9fafb;
+  margin: 0 16px 16px 16px;
+  border-radius: 8px;
+  
+  p {
+    margin: 0;
+    color: var(--ion-color-medium);
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.trainers-list {
+  padding: 0 16px;
+}
+
+.trainer-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--ion-color-primary);
+  }
+  
+  .trainer-header {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    
+    .trainer-avatar {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--ion-color-light), #e5e7eb);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 2px solid #e5e7eb;
+      
+      ion-icon {
+        font-size: 30px;
+        color: var(--ion-color-medium);
+      }
+    }
+    
+    .trainer-info {
+      flex: 1;
+      
+      h3 {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--ion-color-dark);
+      }
+      
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        
+        ion-icon {
+          color: var(--ion-color-warning);
+        }
+        
+        span {
+          font-weight: 500;
+          color: var(--ion-color-dark);
+        }
+        
+        .reviews {
+          color: var(--ion-color-medium);
+          font-size: 12px;
+        }
+      }
+      
+      .location {
+        color: var(--ion-color-medium);
+        font-size: 12px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        
+        ion-icon {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  
+  .trainer-details {
+    margin-bottom: 20px;
+    
+    .bio {
+      color: var(--ion-color-dark);
+      line-height: 1.5;
+      margin: 0 0 16px 0;
+      font-size: 14px;
+    }
+    
+    .specialties {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      
+      ion-chip {
+        --background: var(--ion-color-primary);
+        --color: white;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 16px;
+        
+        ion-icon {
+          font-size: 14px;
+        }
+      }
+    }
+    
+    .experience, .pricing {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ion-color-medium);
+      font-size: 14px;
+      margin-bottom: 8px;
+      
+      ion-icon {
+        font-size: 16px;
+        color: var(--ion-color-primary);
+      }
+    }
+  }
+  
+  .trainer-actions {
+    ion-button {
+      width: 100%;
+      --border-radius: 8px;
+      --border-color: var(--ion-color-primary);
+      --color: var(--ion-color-primary);
+      
+      &:hover {
+        --background: var(--ion-color-primary);
+        --color: white;
+      }
+    }
+  }
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f9fafb;
+  margin: 16px;
+  border-radius: 8px;
+  
+  ion-icon {
+    color: var(--ion-color-medium);
+    margin-bottom: 16px;
+    font-size: 48px;
+  }
+  
+  h3 {
+    color: var(--ion-color-dark);
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+  }
+  
+  ion-button {
+    --border-radius: 8px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .featured-section {
+    padding: 0 8px;
+    
+    .section-header h2 {
+      font-size: 20px;
+    }
+    
+    .section-header p {
+      font-size: 14px;
+    }
+  }
+  
+  .featured-trainer-card {
+    flex: 0 0 260px;
+    padding: 16px;
+    
+    .trainer-info h3 {
+      font-size: 16px;
+    }
+  }
+  
+  .trainer-card .trainer-header {
+    flex-direction: column;
+    text-align: center;
+    
+    .trainer-avatar {
+      align-self: center;
+    }
+  }
+  
+  .filters-content,
+  .results-info,
+  .no-results {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}

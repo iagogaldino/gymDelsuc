@@ -1,0 +1,199 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Personal Trainers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Search Bar -->
+  <div class="search-section">
+    <ion-searchbar [(ngModel)]="searchTerm" placeholder="Buscar personal trainers..." (ionInput)="applyFilters()"
+      show-clear-button="focus">
+    </ion-searchbar>
+  </div>
+
+  <!-- Filters -->
+  <ion-accordion-group>
+    <ion-accordion value="filters">
+      <ion-item slot="header">
+        <ion-label>Filtros</ion-label>
+        <ion-icon name="chevron-down" slot="end"></ion-icon>
+      </ion-item>
+      <div slot="content" class="filters-content">
+        <!-- Objective Filter -->
+        <ion-item>
+          <ion-label>Objetivo</ion-label>
+          <ion-select [(ngModel)]="selectedObjective" (ionChange)="applyFilters()">
+            <ion-select-option value="">Todos os objetivos</ion-select-option>
+            <ion-select-option *ngFor="let obj of objectives" [value]="obj.id">
+              {{ obj.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Price Filter -->
+        <ion-item>
+          <ion-label>Preço máximo</ion-label>
+          <ion-select [(ngModel)]="maxPrice" (ionChange)="applyFilters()">
+            <ion-select-option value="">Qualquer preço</ion-select-option>
+            <ion-select-option *ngFor="let price of priceRanges" [value]="price.id">
+              {{ price.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Rating Filter -->
+        <ion-item>
+          <ion-label>Avaliação mínima</ion-label>
+          <ion-select [(ngModel)]="minRating" (ionChange)="applyFilters()">
+            <ion-select-option value="">Qualquer avaliação</ion-select-option>
+            <ion-select-option *ngFor="let rating of ratingRanges" [value]="rating.id">
+              {{ rating.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Location Filter -->
+        <ion-item>
+          <ion-label>Localização</ion-label>
+          <ion-select [(ngModel)]="selectedLocation" (ionChange)="applyFilters()">
+            <ion-select-option value="">Todas as localidades</ion-select-option>
+            <ion-select-option *ngFor="let location of locations" [value]="location.id">
+              {{ location.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Clear Filters Button -->
+        <ion-button expand="block" fill="outline" (click)="clearFilters()">
+          Limpar Filtros
+        </ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+
+  <!-- Featured Trainers Section -->
+  <div class="featured-section">
+    <div class="section-header">
+      <h2>Personal Trainers em Destaque</h2>
+      <p>Os melhores profissionais selecionados para você</p>
+    </div>
+
+    <div class="featured-trainers-container">
+      <div class="featured-trainers-scroll">
+        <div class="featured-trainer-card" *ngFor="let trainer of featuredTrainers"
+          (click)="viewFeaturedTrainer(trainer.id)">
+          <div class="featured-badge">
+            <ion-icon name="star" color="warning"></ion-icon>
+            <span>{{ trainer.profile.featuredBadge }}</span>
+          </div>
+
+          <div class="trainer-avatar">
+            <ion-icon name="person" size="large"></ion-icon>
+          </div>
+
+          <div class="trainer-info">
+            <h3>{{ trainer.name }}</h3>
+            <p class="specialties">{{ trainer.profile.specialties.slice(0, 2).join(', ') }}</p>
+
+            <div class="rating">
+              <ion-icon name="star" color="warning"></ion-icon>
+              <span>{{ trainer.profile.rating }}/5</span>
+              <span class="reviews">({{ trainer.profile.totalReviews }})</span>
+            </div>
+
+            <p class="location">{{ trainer.profile.location }}</p>
+            <p class="experience">{{ trainer.profile.experience }} anos exp.</p>
+          </div>
+
+          <div class="price-info">
+            <span class="price">{{ getPriceRange(trainer.plans) }}</span>
+            <ion-button size="small" fill="outline">
+              Ver Perfil
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Results Count -->
+  <div class="results-info">
+    <p>{{ filteredTrainers.length }} personal trainer{{ filteredTrainers.length !== 1 ? 's' : '' }} encontrado{{
+      filteredTrainers.length !== 1 ? 's' : '' }}</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Carregando personal trainers...</p>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="!isLoading && filteredTrainers.length === 0" class="no-results">
+    <ion-icon name="search-outline" size="large"></ion-icon>
+    <h3>Nenhum personal trainer encontrado</h3>
+    <p>Tente ajustar os filtros ou buscar com outros termos</p>
+    <ion-button expand="block" (click)="clearFilters()">
+      Limpar Filtros
+    </ion-button>
+  </div>
+
+  <!-- Trainers List -->
+  <div *ngIf="!isLoading && filteredTrainers.length > 0" class="trainers-list">
+    <ion-card *ngFor="let trainer of filteredTrainers" class="trainer-card" (click)="viewTrainer(trainer.id)">
+      <ion-card-content>
+        <div class="trainer-header">
+          <div class="trainer-avatar">
+            <ion-icon name="person" size="large"></ion-icon>
+          </div>
+          <div class="trainer-info">
+            <h3>{{ trainer.name }}</h3>
+            <div class="rating">
+              <ion-icon name="star" color="warning"></ion-icon>
+              <span>{{ trainer.profile.rating }}/5</span>
+              <span class="reviews">({{ trainer.profile.totalReviews }} avaliações)</span>
+            </div>
+            <p class="location">{{ trainer.profile.location }}</p>
+          </div>
+        </div>
+
+        <div class="trainer-details">
+          <p class="bio">{{ trainer.profile.bio }}</p>
+
+          <div class="specialties">
+            <ion-chip *ngFor="let specialty of trainer.profile.specialties.slice(0, 3)" color="primary">
+              <ion-icon [name]="getObjectiveIcon(specialty.toLowerCase())"></ion-icon>
+              <ion-label>{{ specialty }}</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="trainer.profile.specialties.length > 3" color="medium">
+              <ion-label>+{{ trainer.profile.specialties.length - 3 }}</ion-label>
+            </ion-chip>
+          </div>
+
+          <div class="experience">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ trainer.profile.experience }} anos de experiência</span>
+          </div>
+
+          <div class="pricing">
+            <ion-icon name="card-outline"></ion-icon>
+            <span>{{ getPriceRange(trainer.plans) }}</span>
+          </div>
+        </div>
+
+        <div class="trainer-actions">
+          <ion-button expand="block" fill="outline">
+            Ver Perfil
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
