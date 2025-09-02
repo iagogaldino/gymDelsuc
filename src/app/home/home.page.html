@@ -1,45 +1,42 @@
 <ion-toolbar>
-  <ion-buttons slot="secondary">
-  </ion-buttons>
-  <ion-buttons slot="primary">
-    <ion-button>
-      <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-    </ion-button>
-    <ion-button>
-      <ion-icon slot="icon-only" name="search"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <ion-title>Icon Buttons</ion-title>
+  <ion-title>GymDelsuc</ion-title>
 </ion-toolbar>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <h2 class="ion-text-center">
-    Encontre seu Personal Trainer
-  </h2>
-
-  <p class="ion-text-center">
-    Conecte-se com profissionais qualificados
-  </p>
-
-  <ion-searchbar animated="true" placeholder="Buscar personal trainers..."></ion-searchbar>
+<ion-content [fullscreen]="true">
 
   <section>
-    <p>Personal Trainers em Destaque</p>
+    <div class="ion-padding" style="background-color: #F9FAFB;">
+      <h2 class="ion-text-center">
+        Encontre seu Personal Trainer
+      </h2>
+
+      <ion-text color="medium">
+        <p class="ion-text-center">
+          Conecte-se com profissionais qualificados
+        </p>
+      </ion-text>
+
+      <ion-searchbar animated="true" placeholder="Buscar personal trainers..."></ion-searchbar>
+    </div>
+  </section>
+
+  <section>
+    <h4 class="ion-padding">Personal Trainers em Destaque</h4>
     <div class="cards-container">
       @for (item of [{}, {}, {}]; track item) {
       <ion-card>
-        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+        <img alt="Silhouette of mountains" src="./assets/woman.jpg" />
         <ion-card-content>
           <p class="ion-text-center">
             <ion-text color="medium">
               Maria Silva
             </ion-text>
           </p>
-          <p class="ion-text-center">
-            <ion-text color="medium">
+          <ion-text color="medium">
+            <p class="ion-text-center featured-specialty">
               Hipertrofia
-            </ion-text>
-          </p>
+            </p>
+          </ion-text>
           <p class="ion-text-center">
             <ion-text color="medium">
               @for (item of [{}, {}, {}, {}, {}]; track item) {
@@ -63,20 +60,22 @@
   <!-- Todos os Personal Trainers -->
   <section>
 
-    <div class="cards-container">
-      <ion-button color="dark" shape="round">Todos</ion-button>
-      <ion-button color="dark" shape="round" fill="outline">Hipertrofia</ion-button>
-      <ion-button color="dark" shape="round" fill="outline">Emagrecimento</ion-button>
+    <div class="ion-padding" style="background-color: #F9FAFB;">
+      <div class="cards-container">
+        <ion-button color="dark" shape="round">Todos</ion-button>
+        <ion-button color="dark" shape="round" fill="outline">Hipertrofia</ion-button>
+        <ion-button color="dark" shape="round" fill="outline">Emagrecimento</ion-button>
+      </div>
     </div>
 
     <ion-grid>
-      <ion-row>
+      <ion-row class="ion-align-items-center">
         <ion-col size="10">
-          <p>Todos os Personal Trainers</p>
+          <h4>Todos os Personal Trainers</h4>
         </ion-col>
         <ion-col size="2">
           <ion-button fill="clear" size="large">
-            <ion-icon name="filter-outline"></ion-icon>
+            <ion-icon name="funnel"></ion-icon>
           </ion-button>
         </ion-col>
       </ion-row>
@@ -87,7 +86,7 @@
         <ion-row>
           <ion-col size="auto">
             <ion-avatar>
-              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <img alt="Silhouette of a person's head" src="./assets/women.jpg" />
             </ion-avatar>
           </ion-col>
           <ion-col>
@@ -95,9 +94,13 @@
               <ion-grid>
                 <ion-row>
                   <ion-col size="10">
-                    <div>Iago Delsuc</div>
+                    <div class="p-name">Iago Delsuc</div>
                   </ion-col>
-                  <ion-col size="2"><ion-icon name="heart"></ion-icon></ion-col>
+                  <ion-col size="2">
+                    <div class="ion-text-end">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </div>
+                  </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col size="12">
@@ -116,7 +119,11 @@
 
               <ion-grid class="center-container">
                 <ion-col>
-                  <ion-text color="medium">R$ 150/mês</ion-text>
+                  <ion-text color="medium">
+                    <div class="p-price">
+                      R$ 150/mês
+                    </div>
+                  </ion-text>
                 </ion-col>
                 <ion-col size="auto">
                   <ion-button size="small" color="dark">Ver perfil</ion-button>

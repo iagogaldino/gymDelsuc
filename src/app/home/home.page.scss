@@ -2,16 +2,35 @@
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  gap: 12px;         /* spacing between cards */
-  padding: 12px;     /* optional padding */
+  gap: 12px;
+  /* spacing between cards */
 }
 
 .cards-container ion-card {
-  flex: 0 0 auto;    /* prevent cards from shrinking */
-  max-width: 200px;  /* adjust size as you prefer */
+  flex: 0 0 auto;
+  /* prevent cards from shrinking */
+  max-width: 150px;
+  /* adjust size as you prefer */
 }
 
 .center-container {
   display: flex;
-  align-items: center;     /* vertical */
+  align-items: center;
+  /* vertical */
 }
+
+.p-name {
+  font-size: 1.1em;
+  color: black;
+}
+
+.p-price {
+  font-size: 1.1em;
+  color: black;
+}
+
+.featured-specialty {
+  font-size: 0.7em;
+  margin-bottom: 10px;
+}
+  
